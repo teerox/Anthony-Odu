@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.anthonyodu"
-        minSdkVersion 18
+        minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
