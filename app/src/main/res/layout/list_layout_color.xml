@@ -6,7 +6,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="30dp"
-        android:id="@+id/smallimage"
+        android:id="@+id/smallSingleImage"
         android:layout_height="30dp"
         android:src="@color/black"
         android:textColor="@color/black"/>
