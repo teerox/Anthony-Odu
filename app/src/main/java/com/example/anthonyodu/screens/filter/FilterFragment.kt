@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ListAdapter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -25,6 +26,7 @@ import com.example.anthonyodu.databinding.FilterListItemBinding
 import com.example.anthonyodu.databinding.FragmentFilterBinding
 import com.example.anthonyodu.model.FilterArray
 import com.example.anthonyodu.utils.Utility.MY_PERMISSIONS_REQUEST_WRITE_STORAGE
+import com.example.anthonyodu.utils.Utility.isNetworkAvailable
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.filter_list_item.*
 import javax.inject.Inject
@@ -85,7 +87,20 @@ class FilterFragment : Fragment() {
             }
         })
 
+
+        //Check if network is available
+        if (!isNetworkAvailable(requireContext())!!) {
+            val snack =
+                Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_INDEFINITE)
+            snack.setAction("Ok!") {
+                snack.dismiss()
+            }
+            snack.show()
+            Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
+        }
+
         return binding.root
+
     }
 
     //METHOD TO CHECK PERMISSION

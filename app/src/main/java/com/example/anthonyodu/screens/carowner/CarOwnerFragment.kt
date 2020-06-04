@@ -39,9 +39,12 @@ class CarOwnerFragment : Fragment() {
         (requireActivity().application as MyApplication).getSharedComponent().inject(this)
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_car_owner,container,false)
+
         val absoluteFile by lazy {
             File(requireContext().filesDir, Utility.FOLDER.plus("/${Utility.CAR_OWNER_DATA}"))
         }
+
+
         val args = CarOwnerFragmentArgs.fromBundle(requireArguments()).Filterlist
 
         if (!absoluteFile.exists()){
@@ -56,6 +59,8 @@ class CarOwnerFragment : Fragment() {
                 Snackbar.make(binding.root,total.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
+
+
 
 
         return binding.root
