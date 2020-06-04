@@ -1,5 +1,7 @@
 package com.example.anthonyodu.di.module
 
+import android.content.Context
+import com.example.anthonyodu.MyApplication
 import com.example.anthonyodu.api.ApiService
 import com.example.anthonyodu.utils.Utility.BASE_URL
 import dagger.Module
@@ -9,7 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class NetworkModule(private val application: MyApplication) {
+
+    @Provides
+    fun context(): Context {
+        return application
+    }
 
 
     @Singleton
