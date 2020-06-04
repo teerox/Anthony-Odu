@@ -5,7 +5,9 @@ import com.example.anthonyodu.screens.MainActivity
 import com.example.anthonyodu.screens.carowner.CarOwnerFragment
 import com.example.anthonyodu.screens.filter.FilterFragment
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [NetworkModule::class])
 interface ApplicationComponent {
 

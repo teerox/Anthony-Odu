@@ -1,6 +1,6 @@
 package com.example.anthonyodu.api
 
-import com.example.oduanthony.model.FilterArray
+import com.example.anthonyodu.model.FilterArray
 import retrofit2.Call
 import retrofit2.http.GET
 

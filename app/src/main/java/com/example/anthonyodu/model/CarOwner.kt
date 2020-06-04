@@ -1,4 +1,4 @@
-package com.example.oduanthony.model
+package com.example.anthonyodu.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/filterFragment"
-        android:name="com.example.oduanthony.screens.filter.FilterFragment"
+        android:name="com.example.anthonyodu.screens.filter.FilterFragment"
         android:label="Filter"
         tools:layout="@layout/fragment_filter" >
         <action
@@ -16,11 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/allFilter"
-        android:name="com.example.oduanthony.screens.carowner.CarOwnerFragment"
+        android:name="com.example.anthonyodu.screens.carowner.CarOwnerFragment"
         android:label="Car Owners"
         tools:layout="@layout/fragment_car_owner" >
         <argument
             android:name="Filterlist"
-            app:argType="com.example.oduanthony.model.Filter" />
+            app:argType="com.example.anthonyodu.model.Filter" />
     </fragment>
 </navigation>

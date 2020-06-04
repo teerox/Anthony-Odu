@@ -6,7 +6,7 @@
     <data>
     <variable
         name="carOwnerItem"
-        type="com.example.oduanthony.model.CarOwner" />
+        type="com.example.anthonyodu.model.CarOwner" />
     </data>
     <LinearLayout
         android:id="@+id/movie_container"
