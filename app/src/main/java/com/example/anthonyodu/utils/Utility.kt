@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 
 object Utility {
 
+    const val MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 1
     const val BASE_URL = "https://ven10.co/"
     const val FOLDER = "Venten"
     const val DOWNLOAD_URL =

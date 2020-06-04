@@ -2,14 +2,18 @@ package com.example.anthonyodu.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.anthonyodu.datasource.LocalDataSource
 import com.example.anthonyodu.datasource.RemoteDataSource
+import com.example.anthonyodu.model.CarOwnerList
+import com.example.anthonyodu.model.Filter
 import com.example.anthonyodu.model.FilterArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class FilterRepository @Inject constructor(private val remoteDataSource: RemoteDataSource){
+class FilterRepository @Inject constructor(private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource){
+
 
 
     //API RESPONSE
@@ -32,4 +36,14 @@ class FilterRepository @Inject constructor(private val remoteDataSource: RemoteD
         return filterArray
 
     }
+
+
+
+    suspend fun getCarOwner(data:Filter):CarOwnerList{
+        return localDataSource.filterFile(data)
+    }
+
+
+
+
 }
