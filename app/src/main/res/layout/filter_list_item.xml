@@ -31,13 +31,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_margin="4dp"
+                    android:textStyle="bold"
                     tools:text="1990 - 2001"
                     android:text="@{filterList.start_year + ` - `+ filterList.end_year}"
 
@@ -46,22 +50,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Gender"
+                    android:textColor="@color/white"
 
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:text="@{filterList.gender}"
-
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/showwhennoGender"
+                    android:text="No Gender"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:textSize="15dp"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
@@ -84,6 +99,15 @@
                     android:gravity="center"
 
                     android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/showwhennocolor"
+                        android:text="NO COLOR FOUND"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:textSize="20dp"
+                        />
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,6 +125,15 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/showwhennocountry"
+                        android:text="NO COUNTRY FOUND"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:textSize="20dp"
+                        />
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
