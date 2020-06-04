@@ -130,8 +130,6 @@ dependencies {
     implementation 'com.github.ibrahimsn98:CirclesLoadingView:1.0'
 
 
-
-
     //Testing
     testImplementation 'junit:junit:4.13'
     testImplementation 'org.mockito:mockito-core:2.19.0'
