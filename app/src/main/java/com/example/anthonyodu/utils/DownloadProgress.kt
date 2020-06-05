@@ -10,9 +10,9 @@ import com.example.anthonyodu.R
 import javax.inject.Inject
 
 
-class DownloadProgress @Inject constructor(activity:Context?){
-    private val dialog = Dialog(activity!!)
-    fun showDialog() {
+class DownloadProgress @Inject constructor(private var activity:Context?){
+
+    fun showDialog(dialog: Dialog) {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.downloadview)
@@ -20,7 +20,7 @@ class DownloadProgress @Inject constructor(activity:Context?){
         dialog.show()
     }
 
-    fun dismiss() {
+    fun dismiss(dialog: Dialog) {
         dialog.dismiss()
     }
 

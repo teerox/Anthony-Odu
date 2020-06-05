@@ -1,5 +1,6 @@
 package com.example.anthonyodu.di.module
 
+import android.app.Activity
 import android.content.Context
 import com.example.anthonyodu.MyApplication
 import com.example.anthonyodu.api.ApiService
@@ -17,6 +18,7 @@ class NetworkModule(private val application: MyApplication) {
     fun context(): Context {
         return application
     }
+
 
 
     @Singleton

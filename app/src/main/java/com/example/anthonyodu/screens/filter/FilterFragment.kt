@@ -1,7 +1,10 @@
 package com.example.anthonyodu.screens.filter
 
 import android.Manifest
+import android.app.Dialog
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.LinearLayout
 import android.widget.ListAdapter
 import android.widget.Toast
@@ -48,7 +52,7 @@ class FilterFragment : Fragment() {
         // Inflate the layout for this fragment
         (requireActivity().application as MyApplication).getSharedComponent().inject(this)
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_filter, container, false)
-
+        val dialog = Dialog(requireActivity())
 
         //Check for Permission
         checkPermissionAndStart()
@@ -73,7 +77,7 @@ class FilterFragment : Fragment() {
 
         filterViewModel.startMyDownload.observeForever {
             if (!it) {
-                filterViewModel.showDialog()
+                filterViewModel.showDialog(dialog)
                 Snackbar.make(binding.root,"Downloaded Started", Snackbar.LENGTH_LONG).show()
 
             }
@@ -81,7 +85,7 @@ class FilterFragment : Fragment() {
         filterViewModel.completeDownload.observe(viewLifecycleOwner, Observer { isCompleted ->
             isCompleted?.let { result ->
                 if (result) {
-                    filterViewModel.dismiss()
+                    filterViewModel.dismiss(dialog)
                     Snackbar.make(binding.root,"Downloaded Completed", Snackbar.LENGTH_LONG).show()
                 }
             }

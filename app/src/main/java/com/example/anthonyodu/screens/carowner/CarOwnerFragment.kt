@@ -45,6 +45,7 @@ class CarOwnerFragment : Fragment() {
         }
 
 
+        recyclerView = binding.carOwnerRecy
         val args = CarOwnerFragmentArgs.fromBundle(requireArguments()).Filterlist
 
         if (!absoluteFile.exists()){

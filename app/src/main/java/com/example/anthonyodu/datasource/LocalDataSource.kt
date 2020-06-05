@@ -1,8 +1,6 @@
 package com.example.anthonyodu.datasource
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.anthonyodu.model.CarOwnerList
 import com.example.anthonyodu.model.Filter
 import com.example.anthonyodu.utils.Utility
