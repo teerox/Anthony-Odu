@@ -1,5 +1,6 @@
 package com.example.anthonyodu.screens.filter
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Environment
 import android.util.Log
@@ -9,6 +10,7 @@ import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.example.anthonyodu.repository.FilterRepository
 import com.example.anthonyodu.model.FilterArray
+import com.example.anthonyodu.utils.DownloadProgress
 import com.example.anthonyodu.utils.Utility
 import com.example.anthonyodu.utils.Utility.CAR_OWNER_DATA
 import com.example.anthonyodu.utils.Utility.DOWNLOAD_URL
@@ -16,7 +18,7 @@ import com.example.anthonyodu.utils.Utility.FOLDER
 import java.io.File
 import javax.inject.Inject
 
-class FilterViewModel @Inject constructor(context: Context,private val filterRepository: FilterRepository){
+class FilterViewModel @Inject constructor(context: Context,private val filterRepository: FilterRepository,private val dialog: DownloadProgress){
 
     private var _filterList = MutableLiveData<FilterArray>()
     val filterList: LiveData<FilterArray>
@@ -103,13 +105,13 @@ class FilterViewModel @Inject constructor(context: Context,private val filterRep
 
     }
 
-    fun showDialog(){
+    fun showDialog(dialogs: Dialog){
         Log.e("Dialogue","Dialogue On")
-        showDialog()
+        dialog.showDialog(dialogs)
     }
 
-    fun dismiss() {
+    fun dismiss(dialogs: Dialog) {
         Log.e("Dialogue","Dialogue Off")
-        dismiss()
+        dialog.dismiss(dialogs)
     }
 }
