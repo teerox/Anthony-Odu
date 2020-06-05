@@ -2,16 +2,15 @@ package com.example.anthonyodu.screens.filter
 
 import android.app.Dialog
 import android.content.Context
-import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.example.anthonyodu.repository.FilterRepository
 import com.example.anthonyodu.model.FilterArray
 import com.example.anthonyodu.utils.DownloadProgress
-import com.example.anthonyodu.utils.Utility
 import com.example.anthonyodu.utils.Utility.CAR_OWNER_DATA
 import com.example.anthonyodu.utils.Utility.DOWNLOAD_URL
 import com.example.anthonyodu.utils.Utility.FOLDER
@@ -46,6 +45,9 @@ class FilterViewModel @Inject constructor(context: Context,private val filterRep
         File(context.filesDir, FOLDER.plus("/$CAR_OWNER_DATA"))
     }
 
+    private var _currentDownload = MutableLiveData<Int>()
+    private val currentDownload:MutableLiveData<Int>
+            get() = _currentDownload
 
     private val _startMyDownload = MutableLiveData<Boolean>()
     val startMyDownload: LiveData<Boolean>
@@ -62,14 +64,18 @@ class FilterViewModel @Inject constructor(context: Context,private val filterRep
 
     //If file already exist
     fun checkDataExist() {
-        if (!absoluteFile.exists()) {
+        if (!absoluteFile.exists() || _startMyDownload.value == false) {
             _startMyDownload.value = false
             startDownload()
+        }else {
+            Log.e("Data", "Data Exist")
         }
-        Log.e("Data","Data Exist")
+
 
     }
 
+
+    //Start Downloading
     private fun startDownload(): Int {
         if (!file.exists()) file.mkdir()
         return PRDownloader.download(
@@ -87,7 +93,13 @@ class FilterViewModel @Inject constructor(context: Context,private val filterRep
             .setOnCancelListener {
                 Log.e("Cancel","Cancel")
             }
-            .setOnProgressListener { }
+            .setOnProgressListener {
+                val currentMb =(it.currentBytes / 1000000).toInt()
+                _currentDownload.value = currentMb
+              //  _totalDownload.value = totalMb
+
+
+            }
             .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
                     _completeDownload.value = true
@@ -95,19 +107,30 @@ class FilterViewModel @Inject constructor(context: Context,private val filterRep
                     Log.e("Completed","Completed")
                 }
 
-                override fun onError(error: com.downloader.Error?) {
+                override fun onError(error: Error?) {
                     Log.e("error",error?.serverErrorMessage.toString())
-                    _completeDownload.value = true
+                    Log.e("error","Faileddd")
+                    _completeDownload.value = false
 
                 }
             })
-
-
     }
+
+
 
     fun showDialog(dialogs: Dialog){
         Log.e("Dialogue","Dialogue On")
         dialog.showDialog(dialogs)
+            currentDownload.observeForever {current ->
+               // Log.e("Dialogue",current.toString())
+                val percentage = ((current * 100)/21)
+                val currentDownloadText = percentage.toString()
+                dialog.update(currentDownloadText,percentage)
+            }
+
+
+
+
     }
 
     fun dismiss(dialogs: Dialog) {
