@@ -20,7 +20,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:titleTextColor="#FFFFFF"
-            android:background="@color/colorPrimaryDark"
+            android:background="#0c0f22"
             app:theme="@style/ToolbarTheme" />
 
         <fragment

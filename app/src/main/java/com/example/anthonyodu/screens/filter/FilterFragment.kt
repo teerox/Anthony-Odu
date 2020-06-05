@@ -77,16 +77,23 @@ class FilterFragment : Fragment() {
 
         filterViewModel.startMyDownload.observeForever {
             if (!it) {
+
                 filterViewModel.showDialog(dialog)
+
                 Snackbar.make(binding.root,"Downloaded Started", Snackbar.LENGTH_LONG).show()
 
             }
         }
+
+
         filterViewModel.completeDownload.observe(viewLifecycleOwner, Observer { isCompleted ->
             isCompleted?.let { result ->
                 if (result) {
                     filterViewModel.dismiss(dialog)
                     Snackbar.make(binding.root,"Downloaded Completed", Snackbar.LENGTH_LONG).show()
+                }else{
+                    filterViewModel.dismiss(dialog)
+                    Snackbar.make(binding.root,"Downloaded Failed", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
