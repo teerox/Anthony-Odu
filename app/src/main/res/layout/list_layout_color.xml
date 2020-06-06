@@ -5,10 +5,10 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="15dp"
+        android:layout_width="30dp"
         android:id="@+id/smallSingleImage"
-        android:layout_height="15dp"
-        android:src="@color/black"
+        android:layout_height="30dp"
+        android:src="@color/white"
         android:textColor="@color/black"/>
 
 </LinearLayout>

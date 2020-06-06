@@ -51,6 +51,7 @@ class CarOwnerFragment : Fragment() {
         if (!absoluteFile.exists()){
             Snackbar.make(binding.root,"No List Available", Snackbar.LENGTH_LONG).show()
         }else {
+            //Display Data for User
             GlobalScope.launch(Dispatchers.Main) {
                 val result = carOwnerViewModel.filterFile(args)
                 adapter = CarOwnerAdapter(result)
@@ -60,8 +61,6 @@ class CarOwnerFragment : Fragment() {
                 Snackbar.make(binding.root,total.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-
-
 
 
         return binding.root

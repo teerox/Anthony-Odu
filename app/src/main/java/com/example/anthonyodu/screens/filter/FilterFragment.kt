@@ -64,6 +64,7 @@ class FilterFragment : Fragment() {
 
         recyclerView = binding.allFilter
 
+        //Display data
         filterViewModel.filterList.observeForever {
             filterArray ->
             adapter = FilterListAdapter(filterArray){
@@ -75,25 +76,27 @@ class FilterFragment : Fragment() {
             binding.progressbar.visibility = View.GONE
         }
 
+        //Observe for Download Start
         filterViewModel.startMyDownload.observeForever {
             if (!it) {
 
                 filterViewModel.showDialog(dialog)
 
-                Snackbar.make(binding.root,"Downloaded Started", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root,"Download Started", Snackbar.LENGTH_LONG).show()
 
             }
         }
 
 
+        //Observe for Download completed
         filterViewModel.completeDownload.observe(viewLifecycleOwner, Observer { isCompleted ->
             isCompleted?.let { result ->
                 if (result) {
                     filterViewModel.dismiss(dialog)
-                    Snackbar.make(binding.root,"Downloaded Completed", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,"Download Completed", Snackbar.LENGTH_LONG).show()
                 }else{
                     filterViewModel.dismiss(dialog)
-                    Snackbar.make(binding.root,"Downloaded Failed", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,"Download Failed", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
@@ -114,6 +117,8 @@ class FilterFragment : Fragment() {
 
     }
 
+
+
     //METHOD TO CHECK PERMISSION
     private fun checkPermissionAndStart() {
         if (ContextCompat.checkSelfPermission(
@@ -131,6 +136,8 @@ class FilterFragment : Fragment() {
 
 
 
+
+    //Permission request
     private fun promptDialogPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(
