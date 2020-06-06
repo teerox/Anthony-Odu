@@ -44,7 +44,6 @@ class FilterFragment : Fragment() {
     lateinit var binding: FragmentFilterBinding
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: FilterListAdapter
-    var array = arrayListOf<Filter>()
     @Inject
     lateinit var filterViewModel: FilterViewModel
     override fun onCreateView(
@@ -67,33 +66,32 @@ class FilterFragment : Fragment() {
         recyclerView = binding.allFilter
 
         //Display data
-        filterViewModel.filterList.observeForever { filterArray ->
-            if (filterArray != null) {
-
-
-                adapter = FilterListAdapter(filterArray) { filter ->
-                    val action = FilterFragmentDirections.actionFilterFragmentToAllFilter(filter)
-                    findNavController().navigate(action)
-                }
-                recyclerView.adapter = adapter
-                binding.progressbar.visibility = View.GONE
-            }else{
-                adapter = FilterListAdapter(array){}
+        filterViewModel.filterList.observe(viewLifecycleOwner, Observer {
+            filterList ->
+            filterList?.let {
+              filterViewModel.grantAccess.observe(viewLifecycleOwner, Observer {
+                  if(it){
+                      adapter = FilterListAdapter(filterList) { filter ->
+                          val action = FilterFragmentDirections.actionFilterFragmentToAllFilter(filter)
+                          findNavController().navigate(action)
+                      }
+                      recyclerView.adapter = adapter
+                      binding.progressbar.visibility = View.GONE
+                  }
+              })
             }
-        }
+        })
+
 
         //Observe for Download Start
-        filterViewModel.startMyDownload.observeForever {
+        filterViewModel.startMyDownload.observe(viewLifecycleOwner, Observer {
             Log.e("Check It",it.toString())
             if (!it) {
-
-
                 filterViewModel.showDialog(dialog)
-
                 Snackbar.make(binding.root,"Download Started", Snackbar.LENGTH_LONG).show()
 
             }
-        }
+        })
 
 
         //Observe for Download completed
@@ -118,9 +116,6 @@ class FilterFragment : Fragment() {
                 snack.dismiss()
             }
             snack.show()
-        }else{
-            checkPermissionAndStart()
-            filterViewModel.checkDataExist()
         }
 
         return binding.root
@@ -140,6 +135,7 @@ class FilterFragment : Fragment() {
             promptDialogPermission()
 
         } else {
+            filterViewModel.checkDataExist()
             filterViewModel.grantAccess.value = true
         }
     }
