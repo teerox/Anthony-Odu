@@ -119,6 +119,7 @@ class FilterFragment : Fragment() {
             }
             snack.show()
         }else{
+            checkPermissionAndStart()
             filterViewModel.checkDataExist()
         }
 
