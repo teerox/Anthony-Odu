@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp">
+
+        <ImageView
+            android:id="@+id/num1"
+            android:layout_width="100dp"
+            android:background="@color/white"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:layout_alignStart="@+id/num1"
+            android:layout_alignTop="@+id/num1"
+            android:layout_alignEnd="@+id/num1"
+            android:layout_alignBottom="@+id/num1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/singleCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nigeria"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+</LinearLayout>
