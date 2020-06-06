@@ -114,6 +114,8 @@ class FilterFragment : Fragment() {
 
     }
 
+
+
     //METHOD TO CHECK PERMISSION
     private fun checkPermissionAndStart() {
         if (ContextCompat.checkSelfPermission(
@@ -128,6 +130,7 @@ class FilterFragment : Fragment() {
             filterViewModel.grantAccess.value = true
         }
     }
+
 
 
 

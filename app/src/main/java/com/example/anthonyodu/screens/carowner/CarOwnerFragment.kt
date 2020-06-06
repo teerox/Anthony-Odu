@@ -62,8 +62,6 @@ class CarOwnerFragment : Fragment() {
         }
 
 
-
-
         return binding.root
     }
 

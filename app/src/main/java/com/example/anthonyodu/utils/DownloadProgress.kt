@@ -34,9 +34,10 @@ class DownloadProgress @Inject constructor(private val context: Context){
         view?.invalidate()
         val increase = view!!.findViewById<TextView>(R.id.downloadTotal)
         val progress =  view!!.findViewById<ProgressBar>(R.id.progress)
+        progress.progressDrawable.setColorFilter(
+            Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN)
         progress.progress = percent
         increase.text = "$text%"
-
 
     }
 
