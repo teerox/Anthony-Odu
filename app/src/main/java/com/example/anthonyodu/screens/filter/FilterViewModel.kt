@@ -19,22 +19,25 @@ import javax.inject.Inject
 
 class FilterViewModel @Inject constructor(context: Context,private val filterRepository: FilterRepository,private val dialog: DownloadProgress){
 
+
     private var _filterList = MutableLiveData<FilterArray>()
     val filterList: LiveData<FilterArray>
         get() = _filterList
 
 
     init {
+        //initialise data fetch
         fetchAllData()
     }
 
 
+    //Method to fetch data from repository
     private fun fetchAllData() {
         filterRepository.getFilterList()?.let {
             _filterList = it
-
         }
     }
+
 
 
     private val file by lazy {

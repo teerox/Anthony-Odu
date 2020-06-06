@@ -64,6 +64,7 @@ class FilterFragment : Fragment() {
 
         recyclerView = binding.allFilter
 
+        //Display data
         filterViewModel.filterList.observeForever {
             filterArray ->
             adapter = FilterListAdapter(filterArray){
@@ -75,6 +76,7 @@ class FilterFragment : Fragment() {
             binding.progressbar.visibility = View.GONE
         }
 
+        //Observe for Download Start
         filterViewModel.startMyDownload.observeForever {
             if (!it) {
 
@@ -86,6 +88,7 @@ class FilterFragment : Fragment() {
         }
 
 
+        //Observe for Download completed
         filterViewModel.completeDownload.observe(viewLifecycleOwner, Observer { isCompleted ->
             isCompleted?.let { result ->
                 if (result) {
@@ -134,6 +137,7 @@ class FilterFragment : Fragment() {
 
 
 
+    //Permission request
     private fun promptDialogPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(

@@ -17,6 +17,7 @@ class DownloadProgress @Inject constructor(private val context: Context){
 
     var view: View? = null
 
+    //Create UI for Download View
     @SuppressLint("InflateParams")
     fun showDialog(dialog: Dialog) {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -29,6 +30,7 @@ class DownloadProgress @Inject constructor(private val context: Context){
 
     }
 
+    //update the UI
     @SuppressLint("SetTextI18n")
     fun update(text:String,percent:Int){
         view?.invalidate()
