@@ -28,6 +28,7 @@ import com.example.anthonyodu.MyApplication
 import com.example.anthonyodu.R
 import com.example.anthonyodu.databinding.FilterListItemBinding
 import com.example.anthonyodu.databinding.FragmentFilterBinding
+import com.example.anthonyodu.model.Filter
 import com.example.anthonyodu.model.FilterArray
 import com.example.anthonyodu.utils.Utility.MY_PERMISSIONS_REQUEST_WRITE_STORAGE
 import com.example.anthonyodu.utils.Utility.isNetworkAvailable
@@ -43,6 +44,7 @@ class FilterFragment : Fragment() {
     lateinit var binding: FragmentFilterBinding
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: FilterListAdapter
+    var array = arrayListOf<Filter>()
     @Inject
     lateinit var filterViewModel: FilterViewModel
     override fun onCreateView(
@@ -65,20 +67,26 @@ class FilterFragment : Fragment() {
         recyclerView = binding.allFilter
 
         //Display data
-        filterViewModel.filterList.observeForever {
-            filterArray ->
-            adapter = FilterListAdapter(filterArray){
-                filter ->
-                val action = FilterFragmentDirections.actionFilterFragmentToAllFilter(filter)
-                findNavController().navigate(action)
+        filterViewModel.filterList.observeForever { filterArray ->
+            if (filterArray != null) {
+
+
+                adapter = FilterListAdapter(filterArray) { filter ->
+                    val action = FilterFragmentDirections.actionFilterFragmentToAllFilter(filter)
+                    findNavController().navigate(action)
+                }
+                recyclerView.adapter = adapter
+                binding.progressbar.visibility = View.GONE
+            }else{
+                adapter = FilterListAdapter(array){}
             }
-            recyclerView.adapter = adapter
-            binding.progressbar.visibility = View.GONE
         }
 
         //Observe for Download Start
         filterViewModel.startMyDownload.observeForever {
+            Log.e("Check It",it.toString())
             if (!it) {
+
 
                 filterViewModel.showDialog(dialog)
 
@@ -110,7 +118,8 @@ class FilterFragment : Fragment() {
                 snack.dismiss()
             }
             snack.show()
-            Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
+        }else{
+            filterViewModel.checkDataExist()
         }
 
         return binding.root
