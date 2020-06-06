@@ -80,7 +80,7 @@ class FilterFragment : Fragment() {
 
                 filterViewModel.showDialog(dialog)
 
-                Snackbar.make(binding.root,"Downloaded Started", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root,"Download Started", Snackbar.LENGTH_LONG).show()
 
             }
         }
@@ -90,10 +90,10 @@ class FilterFragment : Fragment() {
             isCompleted?.let { result ->
                 if (result) {
                     filterViewModel.dismiss(dialog)
-                    Snackbar.make(binding.root,"Downloaded Completed", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,"Download Completed", Snackbar.LENGTH_LONG).show()
                 }else{
                     filterViewModel.dismiss(dialog)
-                    Snackbar.make(binding.root,"Downloaded Failed", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,"Download Failed", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
